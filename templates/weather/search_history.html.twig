@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historia wyszukiwania i statystyki{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="py-5 text-left">
+    <h1>Statystyki pogody</h1>
+        <h3>Temperatura</h2>
+        <ul>
+            <li>minimalna: {{ weatherStats.temperatureStats.min }}&#176;C</li>
+            <li>maksymalna: {{ weatherStats.temperatureStats.max }}&#176;C</li>
+            <li>średnia: {{ weatherStats.temperatureStats.average }}&#176;C</li>
+        </ul>
+        <h3>Najczęściej wyszukiwanie miasto</h2>
+            {{ weatherStats.topCity }}
+        <h3>Ilość łącznych wyszukiwań</h2>
+            {{ weatherStats.totalNumberOfSearch }}
+    </div>
+
+    <h1>Historia wyszukiwań</h1>
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Miasto</th>
+                    <th>Szerokość geograficzna [&#176]</th>
+                    <th>Długość geograficzna [&#176]</th>
+                    <th>Temperatura [&#176;C]</th>
+                    <th>Wiatr [km/h]</th>
+                    <th>Zachmurzenie [%]</th>
+                    <th>Opis</th>
+                    <th>Czas wyszukiwania</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for weather in weatherObjects %}
+                <tr>
+                    <td>{{ weather.city }}</td>
+                    <td>{{ weather.longitude }}</td>
+                    <td>{{ weather.latitude }}</td>
+                    <td>{{ weather.temperature }}</td>
+                    <td>{{ weather.wind }}</td>
+                    <td>{{ weather.clouds }}</td>
+                    <td>{{ weather.description }}</td>
+                    <td>{{ weather.searchDateTime | date('Y-m-d H:i:s') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-center">
+            <div class="navigation">
+                {{ knp_pagination_render(weatherObjects) }}
+            </div>
+        </div>
+
+</div>
+{% endblock %}
