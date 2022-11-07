@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\EventSubscriber;
 
 use App\Event\NewWeatherEvent;
@@ -11,13 +13,13 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class WeatherEventSubscriber implements EventSubscriberInterface {
 
-    private $weatherService;
+    private WeatherServiceInterface $weatherService;
 
     public function __construct(WeatherServiceInterface $weatherService) {
         $this->weatherService = $weatherService;
     }
 
-    public static function getSubscribedEvents() {
+    public static function getSubscribedEvents(): array {
         return [
             NewWeatherEvent::class => 'onNewWeatherEvent',
         ];

@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Weather;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 
 /**
@@ -20,7 +23,7 @@ class WeatherRepository extends ServiceEntityRepository {
     private const TOTAL_NUMBER_QUERY = 'SELECT Count(w.id) as count FROM App\Entity\Weather w';
     private const TEMPERATURE_STATS_QUERY = 'SELECT MIN(w.temperature) as min, MAX(w.temperature) as max, AVG(w.temperature) as avg FROM App\Entity\Weather w';
 
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(ManagerRegistry $registry) {
         parent::__construct($registry, Weather::class);
@@ -41,7 +44,7 @@ class WeatherRepository extends ServiceEntityRepository {
 
     public function getTotalNumberOfSearch(): int {
         $query = $this->entityManager->createQuery(self::TOTAL_NUMBER_QUERY);
-        return $query->getSingleScalarResult();
+        return (int) $query->getSingleScalarResult();
     }
 
     public function getTemperatureStats(): array {

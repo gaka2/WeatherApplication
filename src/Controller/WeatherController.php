@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\WeatherServiceInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use App\Service\Exception\ServiceException;
 
 /**
@@ -19,14 +22,14 @@ class WeatherController extends AbstractController {
     /**
      * @Route("/", name="show_map", methods={"GET"})
      */
-    public function showMap() {
+    public function showMap(): Response {
         return $this->render('weather/show_map.html.twig');
     }
 
     /**
      * @Route("/searchHistory", name="search_history", methods={"GET"})
      */
-    public function showSearchHistory(WeatherServiceInterface $weatherService, Request $request) {
+    public function showSearchHistory(WeatherServiceInterface $weatherService, Request $request): Response {
         try {
             $pageNumber = $request->query->getInt('page', self::DEFAULT_PAGE_NUMBER);
             if ($pageNumber <= 0) {

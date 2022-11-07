@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\WeatherRepository;
@@ -18,58 +20,58 @@ class Weather
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $city;
+    private string $city;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $latitude;
+    private float $latitude;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $longitude;
-
-    /**
-     * @ORM\Column(type="float")
-     * @JMS\Expose()
-     */
-    private $temperature;
+    private float $longitude;
 
     /**
      * @ORM\Column(type="float")
      * @JMS\Expose()
      */
-    private $wind;
+    private float $temperature;
 
     /**
      * @ORM\Column(type="float")
      * @JMS\Expose()
      */
-    private $clouds;
+    private float $wind;
+
+    /**
+     * @ORM\Column(type="float")
+     * @JMS\Expose()
+     */
+    private float $clouds;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @JMS\Expose()
      */
-    private $description;
+    private string $description;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $searchDateTime;
+    private \DateTimeInterface $searchDateTime;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getCity(): ?string
+    public function getCity(): string
     {
         return $this->city;
     }
@@ -81,7 +83,7 @@ class Weather
         return $this;
     }
 
-    public function getLatitude(): ?float
+    public function getLatitude(): float
     {
         return $this->latitude;
     }
@@ -93,7 +95,7 @@ class Weather
         return $this;
     }
 
-    public function getLongitude(): ?float
+    public function getLongitude(): float
     {
         return $this->longitude;
     }
@@ -105,7 +107,7 @@ class Weather
         return $this;
     }
 
-    public function getTemperature(): ?float
+    public function getTemperature(): float
     {
         return $this->temperature;
     }
@@ -117,7 +119,7 @@ class Weather
         return $this;
     }
 
-    public function getWind(): ?float
+    public function getWind(): float
     {
         return $this->wind;
     }
@@ -129,7 +131,7 @@ class Weather
         return $this;
     }
 
-    public function getClouds(): ?float
+    public function getClouds(): float
     {
         return $this->clouds;
     }
@@ -141,7 +143,7 @@ class Weather
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -153,7 +155,7 @@ class Weather
         return $this;
     }
 
-    public function getSearchDateTime(): ?\DateTimeInterface
+    public function getSearchDateTime(): \DateTimeInterface
     {
         return $this->searchDateTime;
     }

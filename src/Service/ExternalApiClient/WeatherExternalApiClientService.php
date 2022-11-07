@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\ExternalApiClient;
 
 use App\Entity\Weather;
@@ -17,8 +19,8 @@ class WeatherExternalApiClientService implements WeatherExternalApiClientService
     private const UNITS = 'metric';
     private const LANGUAGE = 'pl';
 
-    private $client;
-    private $apiKey;
+    private HttpClientInterface $client;
+    private string $apiKey;
 
     public function __construct(HttpClientInterface $client, string $apiKey) {
         $this->client = $client;

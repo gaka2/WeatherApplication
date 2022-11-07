@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataTransferObject;
 
 /**
  * @author Karol Gancarczyk
  */
 class TemperatureStats {
-    private $min;
-    private $max;
-    private $average;
+    private float $min;
+    private float $max;
+    private float $average;
 
     public function __construct(float $min, float $max, float $average) {
         $this->min = $min;

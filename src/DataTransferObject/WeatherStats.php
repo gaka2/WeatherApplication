@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataTransferObject;
 
 /**
  * @author Karol Gancarczyk
  */
 class WeatherStats {
-    private $temperatureStats;
-    private $topCity;
-    private $totalNumberOfSearch;
+    private TemperatureStats $temperatureStats;
+    private string $topCity;
+    private int $totalNumberOfSearch;
 
     public function __construct(TemperatureStats $temperatureStats, string $topCity, int $totalNumberOfSearch) {
         $this->temperatureStats = $temperatureStats;

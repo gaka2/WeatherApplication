@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Event;
 
 use Symfony\Contracts\EventDispatcher\Event;
@@ -10,7 +12,7 @@ use App\Entity\Weather;
  */
 class NewWeatherEvent extends Event {
 
-    private $weather;
+    private Weather $weather;
 
     public function __construct(Weather $weather) {
         $this->weather = $weather;

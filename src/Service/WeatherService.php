@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Entity\Weather;
@@ -20,11 +22,11 @@ use App\Event\NewWeatherEvent;
  */
 class WeatherService implements WeatherServiceInterface {
 
-    private $weatherApiClient;
-    private $logger;
-    private $paginator;
-    private $weatherRepository;
-    private $eventDispatcher;
+    private WeatherExternalApiClientServiceInterface $weatherApiClient;
+    private LoggerInterface $logger;
+    private PaginatorInterface $paginator;
+    private WeatherRepository $weatherRepository;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(WeatherExternalApiClientServiceInterface $weatherApiClient, LoggerInterface $logger, PaginatorInterface $paginator, WeatherRepository $weatherRepository, EventDispatcherInterface $eventDispatcher) {
         $this->weatherApiClient = $weatherApiClient;
@@ -82,7 +84,7 @@ class WeatherService implements WeatherServiceInterface {
     public function getWeatherStats(): WeatherStats {
         try {
             $result = $this->weatherRepository->getTemperatureStats();
-            $temperatureStats = new TemperatureStats($result['min'], $result['max'], $result['avg']);
+            $temperatureStats = new TemperatureStats((float) $result['min'], (float) $result['max'], (float) $result['avg']);
             $topCity = $this->weatherRepository->getTopCity();
             $totalNumberOfSearch = $this->weatherRepository->getTotalNumberOfSearch();
             $weatherStats = new WeatherStats($temperatureStats, $topCity, $totalNumberOfSearch);
